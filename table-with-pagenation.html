@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Bootstrap Table with Dynamic Pagination</title>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Table with Dynamic Pagination</h2>
+    <table class="table" id="myTable">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Your rows go here -->
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            
+            <tr>
+                <td>1</td>
+                <td>Row 1 Data</td>
+            </tr>
+            
+            
+
+
+
+
+            <!-- Add more rows as needed -->
+        </tbody>
+    </table>
+
+    <nav>
+        <ul class="pagination" id="pagination">
+            <!-- Previous button -->
+            <li class="page-item" id="prevBtn">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <!-- Page links -->
+            <!-- ... (as before) ... -->
+            <!-- Next button -->
+            <li class="page-item" id="nextBtn">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Initialize variables
+        var table = document.getElementById('myTable');
+        var tbody = table.getElementsByTagName('tbody')[0];
+        var rows = Array.from(tbody.getElementsByTagName('tr'));
+        var itemsPerPage = 10;
+        var currentPage = 1;
+
+        // Calculate the number of pages
+        var numPages = Math.ceil(rows.length / itemsPerPage);
+
+        // Generate pagination links dynamically
+        var pagination = document.getElementById('pagination');
+        for (var i = 1; i <= numPages; i++) {
+            var li = document.createElement('li');
+            li.className = 'page-item';
+            li.innerHTML = '<a class="page-link" href="#">' + i + '</a>';
+            pagination.appendChild(li);
+        }
+
+        // Show the initial page
+        showPage(currentPage);
+
+        // Add click event listeners to pagination links
+        var pageLinks = pagination.getElementsByTagName('a');
+        for (var i = 0; i < pageLinks.length; i++) {
+            pageLinks[i].addEventListener('click', function (event) {
+                event.preventDefault();
+                currentPage = parseInt(event.target.innerHTML);
+                showPage(currentPage);
+                updatePaginationLinks();
+            });
+        }
+
+        // Next button click event
+        document.getElementById('nextBtn').addEventListener('click', function (event) {
+            event.preventDefault();
+            if (currentPage < numPages) {
+                currentPage++;
+                showPage(currentPage);
+                updatePaginationLinks();
+            }
+        });
+
+        // Previous button click event
+        document.getElementById('prevBtn').addEventListener('click', function (event) {
+            event.preventDefault();
+            if (currentPage > 1) {
+                currentPage--;
+                showPage(currentPage);
+                updatePaginationLinks();
+            }
+        });
+
+        // Function to display the specified page
+        function showPage(pageNum) {
+            var start = (pageNum - 1) * itemsPerPage;
+            var end = start + itemsPerPage;
+            rows.forEach(function (row, index) {
+                if (index >= start && index < end) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // Function to update active state in pagination links
+        function updatePaginationLinks() {
+            pageLinks.forEach(function (link, index) {
+                link.parentElement.classList.remove('active');
+                if (index + 1 === currentPage) {
+                    link.parentElement.classList.add('active');
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html> 

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* .container {
+            margin: 0 auto;
+            width: 1000px;
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+            flex-direction: column;
+        } */
+
+        input {
+            margin-top: 50px;
+            width: 300px;
+            height: 42px;
+            transition: 0.2s;
+            border-radius: 10px;
+        }
+
+        .dropdown {
+            width: 300px;
+            height: 60vh;
+            background-color: brown;
+            opacity: 0;
+            transition: 0.2s;
+        }
+        .input-open {
+            border-bottom-left-radius: 0px;
+            border-bottom-right-radius: 0px;
+            width: 500px;
+        }
+    </style>
+
+
+    <input type="search input-open" id="box-input" onfocus="opendropdown()">
+    <div class="dropdown" id="box-dropdown"></div>
+
+    <script>
+
+        function opendropdown() {
+            var boxinput = document.getElementById("box-input");
+            var dropdown = document.getElementById("box-dropdown");
+
+
+            boxinput.classList.add("input-open");
+
+            dropdown.style.opacity = "1";
+
+            dropdown.style.width = "500px";
+
+            // Add event listener to detect clicks outside of the dropdown
+            document.body.addEventListener("click", function(event) {
+                // Check if the target of the click is outside of the dropdown
+                if (!dropdown.contains(event.target) && event.target !== boxinput) {
+                    // Close the dropdown
+                    boxinput.classList.remove("input-open");
+                    dropdown.style.opacity = "0";
+                    dropdown.style.width = "300px"; 
+                }
+            });
+            
+        }
+
+    </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .pain-scale {
+      text-align: center;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: inline-block;
+      margin: 0 10px;
+    }
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    input[type="radio"] + label {
+      cursor: pointer;
+      padding: 10px;
+      border: 2px solid #3498db;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    input[type="radio"]:checked + label {
+      background-color: #3498db;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="pain-scale">
+    <input type="radio" id="pain-1" name="pain-level" value="1">
+    <label for="pain-1">1</label>
+
+    <input type="radio" id="pain-2" name="pain-level" value="2">
+    <label for="pain-2">2</label>
+
+    <input type="radio" id="pain-3" name="pain-level" value="3">
+    <label for="pain-3">3</label>
+
+    <input type="radio" id="pain-4" name="pain-level" value="4">
+    <label for="pain-4">4</label>
+
+    <input type="radio" id="pain-5" name="pain-level" value="5">
+    <label for="pain-5">5</label>
+
+    <input type="radio" id="pain-6" name="pain-level" value="6">
+    <label for="pain-6">6</label>
+
+    <input type="radio" id="pain-7" name="pain-level" value="7">
+    <label for="pain-7">7</label>
+
+    <input type="radio" id="pain-8" name="pain-level" value="8">
+    <label for="pain-8">8</label>
+
+    <input type="radio" id="pain-9" name="pain-level" value="9">
+    <label for="pain-9">9</label>
+
+    <input type="radio" id="pain-10" name="pain-level" value="10">
+    <label for="pain-10">10</label>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoverable Sub Dropdown</title>
+    <style>
+        .main-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .sub-dropdown {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 100%;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+        }
+
+        .main-dropdown:hover .sub-dropdown {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Main Dropdown -->
+<div class="main-dropdown" onmouseover="showSubDropdown()">
+    <select>
+        <option value="Option1">Option 1</option>
+        <option value="Option2">Option 2 (hover for sub-options)</option>
+        <option value="Option3">Option 3</option>
+        <option value="Option4">Option 4 (hover for sub-options)</option>
+        <!-- Add more options as needed -->
+    </select>
+
+    <!-- Sub Dropdown -->
+    <select class="sub-dropdown">
+        <!-- Sub-options will be dynamically populated based on the hovered main option -->
+    </select>
+</div>
+
+<script>
+    function showSubDropdown() {
+        var mainDropdown = document.querySelector('.main-dropdown select');
+        var subDropdown = document.querySelector('.sub-dropdown');
+
+        // Clear existing sub-options
+        subDropdown.innerHTML = '';
+
+        // Check if the hovered option has the 'sub-option' class
+        var selectedOption = mainDropdown.options[mainDropdown.selectedIndex];
+        if (selectedOption.className === 'sub-option') {
+            // Dynamically populate sub-options based on the selected main option
+            updateSubDropdown(selectedOption.value);
+        } else {
+            // Hide sub-dropdown if not hovering over a sub-option
+            subDropdown.style.display = 'none';
+        }
+    }
+
+    function updateSubDropdown(mainOptionValue) {
+        var subDropdown = document.querySelector('.sub-dropdown');
+
+        // Add sub-options based on the main option value
+        switch (mainOptionValue) {
+            case 'Option2':
+                subDropdown.options.add(new Option('SubOption2-1', 'SubOption2-1'));
+                subDropdown.options.add(new Option('SubOption2-2', 'SubOption2-2'));
+                break;
+            case 'Option4':
+                subDropdown.options.add(new Option('SubOption4-1', 'SubOption4-1'));
+                subDropdown.options.add(new Option('SubOption4-2', 'SubOption4-2'));
+                break;
+            // Add more cases as needed
+        }
+
+        // Show sub-dropdown
+        subDropdown.style.display = 'block';
+    }
+</script>
+
+</body>
+</html>

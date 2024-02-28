@@ -1,0 +1,163 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+body {
+  height: 100vh !important;
+  background-color: gray !important;
+}
+.flex {
+  display: flex;
+  align-items: center;
+}
+.logo-img{
+  min-width: 55px;
+  background-color: brown;
+  display: flex;
+  justify-content: center;
+}
+.logo-img img{
+  height: 35px;
+  width: 35px;
+  object-fit: cover;
+}
+.logo-name {
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.open .logo-name {
+  opacity: 100%;
+}
+
+#sidebar-open{
+  display: none;
+}
+
+#sidebar-close{
+  margin-left: auto;
+  display: none;
+}
+
+.sidebar {
+  background-color: white !important;
+  position: fixed;
+  width: 75px;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  padding: 15px 10px;
+  transition: all 0.3s ease-in-out;
+}
+.open {
+  width: 300px !important;
+}
+.menu-container {
+  /* background-color: brown; */
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: 40px;
+  height: calc(100% - 60px);
+}
+.menu-title {
+  /* background-color: aqua; */
+  height: 50px;
+  width: 55px;
+  position: relative;
+}
+.menu-title .title {
+  opacity: 0%;
+  transition: all 0.3s ease-in;
+}
+.open .menu-title .title {
+  opacity: 100%;
+}
+
+.menu-container::-webkit-scrollbar {
+  display: none;
+}
+
+.menu-title .line {
+  position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
+  height: 3px;
+  width: 20px;
+  background-color: blue;
+}
+.menu-title .line {
+  opacity: 100%;
+  transition: all 0.3s ease-out;
+}
+
+.open .menu-title .line {
+  opacity: 0%;
+}
+
+.li-item {
+  list-style: none;
+}
+.link {
+  text-decoration: none;
+  border-radius: 6px;
+  /* background-color: blue; */
+  margin-bottom: 10px;
+  color: gray;
+}
+.link span {
+  white-space: nowrap;
+}
+
+.link:hover {
+  background-color: blue;
+  color: white;
+}
+.link i {
+  height: 50px;
+  min-width: 55px;
+  display: flex;
+  font-size: 22px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  /* background-color: brown; */
+}
+.top-nav {
+  background-color: aqua;
+  height: 50px;
+  width: 500px;
+  max-width: 100%;
+  position: fixed;
+  left: 60%;
+  display: flex;
+  align-items: center;
+}
+.top-nav button {
+  background-color: rgb(255, 0, 0);
+  height: 35px;
+  width: 35px;
+  margin-left: 10px;
+}
+
+/* responsive */
+@media screen and (max-width: 500px) {
+  .top-nav {
+    left: 0;
+  }
+
+  .sidebar {
+    left: -100%;
+  }
+  .open {
+    left: 0;
+    z-index: 99;
+  }
+  #sidebar-open{
+    display: block;
+  }
+  #sidebar-close{
+    display: block;
+  }
+}

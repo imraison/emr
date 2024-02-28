@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Layout</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+    }
+
+    #main-container {
+      display: flex;
+    }
+
+    #side-menu {
+      width: 250px;
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    #top-nav {
+      width: 100%;
+      background-color: #444;
+      color: #fff;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    #content {
+      flex-grow: 1;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .menu-item {
+      padding: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .menu-item:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="main-container">
+    <div id="side-menu">
+      <div class="menu-item" onclick="changeContent('dashboard')">Dashboard</div>
+      <div class="menu-item" onclick="changeContent('reports')">Reports</div>
+      <div class="menu-item" onclick="changeContent('settings')">Settings</div>
+    </div>
+
+    <div id="content">
+      <!-- Content will be dynamically changed here -->
+      <h1>Welcome to the Dashboard!</h1>
+      <p>Select a menu item to view different content.</p>
+    </div>
+  </div>
+
+  <div id="top-nav">
+    <p>Top Navigation Bar</p>
+  </div>
+
+  <script>
+    function changeContent(page) {
+      var contentDiv = document.getElementById('content');
+      contentDiv.innerHTML = '';
+
+      if (page === 'dashboard') {
+        loadPage('dashboard.html');
+      } else if (page === 'reports') {
+        loadPage('reports.html');
+      } else if (page === 'settings') {
+        loadPage('settings.html');
+      }
+    }
+
+    function loadPage(pageURL) {
+      fetch(pageURL)
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('content').innerHTML = data;
+        })
+        .catch(error => {
+          console.error('Error loading page:', error);
+        });
+    }
+  </script>
+
+</body>
+</html>

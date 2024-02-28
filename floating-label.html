@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .floating-label {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .floating-label input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .floating-label label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 10px;
+            pointer-events: none;
+            transition: all 0.3s ease-out;
+        }
+
+        .floating-label input:focus + label,
+        .floating-label input:not(:placeholder-shown) + label {
+            transform: translateY(-100%);
+            font-size: 0.8rem;
+            color: #4285f4; /* Change this color to your desired label color */
+        }
+    </style>
+    <title>Floating Label Example</title>
+</head>
+<body>
+
+    <div class="container-fluid consultant-box-bg">
+        <!-- ... (Your existing HTML code) -->
+
+        <div class="row">
+            <div class="col-12 mt-3 mb-4">
+                <div class="floating-label">
+                    <input class="medication-search-input form-control"
+                        type="search" placeholder=" "
+                        onfocus="showDrugDropdown()"
+                        oninput="filterDrugDropdown(this.value)">
+                    <label for="medication-search-input">Search medication</label>
+                </div>
+
+                <div class="medication-search-dropdown-content" id="medication-dropdown">
+                    <!-- Dropdown items will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ... (Your existing HTML code) -->
+    </div>
+
+    <!-- medication-search-script -->
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <script>
+        let dataMedication = ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5', 'Option 6', 'Option 7', 'Option 8'];
+
+        function populateDrugDropdown(filter) {
+            const dropdown = document.getElementById('medication-dropdown');
+            dropdown.innerHTML = '';
+            dataMedication.forEach(item => {
+                if (!filter || item.toLowerCase().includes(filter.toLowerCase())) {
+                    const option = document.createElement('div');
+                    option.className = 'medication-dropdown-item';
+                    option.textContent = item;
+                    option.onclick = function () {
+                        selectDrugItem(item);
+                    };
+                    dropdown.appendChild(option);
+                }
+            });
+
+            dropdown.style.display = dropdown.children.length > 0 ? 'block' : 'none';
+        }
+
+        function showDrugDropdown() {
+            populateDrugDropdown();
+        }
+
+        function filterDrugDropdown(value) {
+            populateDrugDropdown(value);
+        }
+
+        document.addEventListener('click', function (event) {
+            const dropdown = document.getElementById('medication-dropdown');
+            const input = document.querySelector('.medication-search-input');
+            if (event.target !== input && !dropdown.contains(event.target)) {
+                dropdown.style.display = 'none';
+            }
+        });
+
+        function selectDrugItem(item) {
+            const medicationModal = new bootstrap.Modal(document.getElementById('medicationModal'));
+            medicationModal.show();
+
+            // Set the selected item in the search input field
+            const searchInput = document.querySelector('.medication-search-input');
+            searchInput.value = item;
+
+            // Optionally, you can also close the dropdown after selecting an item
+            const dropdown = document.getElementById('medication-dropdown');
+            dropdown.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

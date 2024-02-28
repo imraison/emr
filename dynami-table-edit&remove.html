@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.3/css/all.css">
+    <style>
+        .mt-3 {
+            margin-top: 1rem !important;
+        }
+
+        .table-action-btn button {
+            margin-right: 5px;
+        }
+    </style>
+    <title>Dynamic Table</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-4">
+            <label for="exam-category">Category</label><br />
+            <select class="form-select" id="exam-category">
+                <option value="1">Volvo</option>
+                <option value="2">Saab</option>
+                <option value="3">Opel</option>
+                <option value="4">Audi</option>
+            </select>
+        </div>
+
+        <div class="col-2">
+            <label for="exam-status">Status</label><br />
+            <select class="form-select" id="exam-status">
+                <option value="1">Normal</option>
+                <option value="2">Abnormal</option>
+            </select>
+        </div>
+
+        <div class="col-5">
+            <label for="exam-note">Notes</label><br />
+            <input class="form-control" type="text" id="exam-note" />
+        </div>
+
+        <div class="col-1 exam-add-btn">
+            <button type="button" class="btn btn-primary" onclick="addRow()"><i class="fas fa-plus"></i></button>
+        </div>
+    </div>
+
+    <div class="table-responsive mt-5">
+        <table class="table table-bordered consultant-table-bg">
+            <thead class="consultant-table-head">
+                <tr>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Notes</th>
+                    <th class="col-xl-2">Action</th>
+                </tr>
+            </thead>
+            <tbody class="consultant-table-body" id="table-body">
+                <!-- Table rows will be added dynamically here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function addRow() {
+        var category = document.getElementById("exam-category").value;
+        var status = document.getElementById("exam-status").value;
+        var note = document.getElementById("exam-note").value;
+
+        var tableBody = document.getElementById("table-body");
+        var newRow = tableBody.insertRow();
+
+        var cell1 = newRow.insertCell(0);
+        var cell2 = newRow.insertCell(1);
+        var cell3 = newRow.insertCell(2);
+        var cell4 = newRow.insertCell(3);
+
+        cell1.innerHTML = category;
+        cell2.innerHTML = status;
+        cell3.innerHTML = note;
+        cell4.innerHTML = `
+            <button class="edit-btn btn" type="button" onclick="editRow(this)"><i class="fas fa-pen-to-square"></i></button>
+            <button class="delete-btn btn" type="button" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+        `;
+
+        clearInputs();
+    }
+
+    function editRow(button) {
+        var row = button.parentNode.parentNode;
+        var cells = row.getElementsByTagName("td");
+
+        document.getElementById("exam-category").value = cells[0].innerHTML;
+        document.getElementById("exam-status").value = cells[1].innerHTML;
+        document.getElementById("exam-note").value = cells[2].innerHTML;
+
+        row.parentNode.removeChild(row);
+    }
+
+    function deleteRow(button) {
+        var row = button.parentNode.parentNode;
+        row.parentNode.removeChild(row);
+    }
+
+    function clearInputs() {
+        document.getElementById("exam-category").value = "";
+        document.getElementById("exam-status").value = "";
+        document.getElementById("exam-note").value = "";
+    }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
